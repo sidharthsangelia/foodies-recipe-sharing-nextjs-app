@@ -11,21 +11,22 @@ export default function ShareMealPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-
-    // Upload image first
+  
     const imageFile = formData.get("image");
+    const imageFormData = new FormData();
+    imageFormData.append("image", imageFile);
+  
     const uploadRes = await fetch("/api/upload", {
       method: "POST",
-      body: new FormData().append("image", imageFile),
+      body: imageFormData,
     });
-
+  
     const uploadData = await uploadRes.json();
     if (!uploadData.imageUrl) {
       setStatus("Image upload failed");
       return;
     }
-
-    // Add image URL to form data
+  
     const fullData = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -34,17 +35,17 @@ export default function ShareMealPage() {
       instructions: formData.get("instructions"),
       image: uploadData.imageUrl,
     };
-
-    // Submit full form to your shareMeal action (make API route if needed)
+  
     const saveRes = await fetch("/api/share-meal", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(fullData),
     });
-
+  
     const result = await saveRes.json();
     setStatus(result.message || "Meal shared!");
   }
+  
 
   return (
     <>
