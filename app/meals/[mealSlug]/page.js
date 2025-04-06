@@ -1,10 +1,16 @@
 import { getMeal } from "@/lib/meals";
 import classes from "./page.module.css";
 import Image from "next/image";
-export default function page({ params }) {
-  const meal = getMeal(params.mealSlug);
+
+export default async function Page({ params }) {
+  const meal = await getMeal(params.mealSlug);
+
+  if (!meal) {
+    return <p style={{ padding: "2rem" }}>Meal not found!</p>;
+  }
 
   meal.instructions = meal.instructions.replace(/\n/g, "<br/>");
+
   return (
     <>
       <header className={classes.header}>
