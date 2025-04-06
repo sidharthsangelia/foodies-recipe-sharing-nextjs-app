@@ -1,17 +1,11 @@
-"use client"
 import ImagePicker from "@/components/meals/image-picker";
 import classes from "./page.module.css";
 import { shareMeal } from "@/lib/actions";
 import MealsFormSubmit from "@/components/meals/meals-form-submit";
-import { useFormState } from 'react-dom'; // not from 'react'
-
-import { useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 
 export default function ShareMealPage() {
-
-  const [state, formAction]= useFormState(shareMeal, {message:null});
-
-const status = useFormStatus();
+  const [state, formAction] = useFormState(shareMeal, { message: null });
 
   return (
     <>
@@ -59,7 +53,7 @@ const status = useFormStatus();
           {state.message && <p>{state.message}</p>}
 
           <div className={classes.actions}>
-            <MealsFormSubmit></MealsFormSubmit>
+            <MealsFormSubmit />
           </div>
         </form>
       </main>
