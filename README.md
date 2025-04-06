@@ -37,6 +37,23 @@ This is a full-stack recipe sharing app built using **Next.js (App Router)**. It
 - Used **CSS Modules** for scoped styling per component.
 - Built responsive layouts for better UI on desktop and mobile.
 
+## 🧨 Deployment Issues
+
+While the app worked perfectly during local development—with all features like viewing, adding, and uploading meals functioning smoothly—it unfortunately broke after deployment to **Vercel**.
+
+Some **core features stopped working** in production, especially:
+- API routes handling file uploads (`/api/upload`) return `500 Internal Server Error`
+- JSON parsing errors due to unexpected or missing responses
+- Multipart form data not being handled correctly in the deployed environment
+
+Despite the best effort to debug and resolve these deployment issues, they remain unresolved for now due to the limitations of serverless functions in handling multipart form data and the absence of a persistent storage solution.
+
+> 🛠️ Fixing these would likely require switching to an external file/image storage service like **Cloudinary** or **AWS S3**, and adjusting the API architecture accordingly.
+
+---
+
+
+
 ### ⚠️ Error Handling & Debugging
 - Faced and fixed:
   - `500 Internal Server Error` during file uploads.
